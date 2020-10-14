@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-
+    private final ImageButton[][] btns = new ImageButton[3][3];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //System.out.println(btns[0][0].toString());
     }
 
     @Override

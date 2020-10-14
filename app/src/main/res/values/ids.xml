@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="ImageButton1" type="id"/>
-    <item name="ImageButton3" type="id"/>
-    <item name="ImageButton2" type="id"/>
+    <item name="ImageButton00" type="id"/>
+    <item name="ImageButton01" type="id"/>
+    <item name="ImageButton02" type="id"/>
+    <item name="ImageButton10" type="id"/>
+    <item name="ImageButton11" type="id"/>
+    <item name="ImageButton12" type="id"/>
+    <item name="ImageButton20" type="id"/>
+    <item name="ImageButton21" type="id"/>
+    <item name="ImageButton22" type="id"/>
 </resources>
