@@ -10,12 +10,24 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
     private final ImageButton[][] btns = new ImageButton[3][3];
+    private Game game = new Game();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //System.out.println(btns[0][0].toString());
+        // assign buttons
+        btns[0][0] = findViewById(R.id.ImageButton00);
+        btns[1][0] = findViewById(R.id.ImageButton10);
+        btns[2][0] = findViewById(R.id.ImageButton20);
+        btns[0][1] = findViewById(R.id.ImageButton01);
+        btns[1][1] = findViewById(R.id.ImageButton11);
+        btns[2][1] = findViewById(R.id.ImageButton21);
+        btns[0][2] = findViewById(R.id.ImageButton02);
+        btns[1][2] = findViewById(R.id.ImageButton12);
+        btns[2][2] = findViewById(R.id.ImageButton22);
+
+        game.move(0, 0, true);
     }
 
     @Override
