@@ -188,8 +188,7 @@
                 android:padding="0pt"
                 android:scaleType="centerInside"
                 android:topLeftRadius="100dp"
-                android:topRightRadius="100dp"
-                android:src="@drawable/O1"/>
+                android:topRightRadius="100dp"/>
         </LinearLayout>
     </LinearLayout>
 
