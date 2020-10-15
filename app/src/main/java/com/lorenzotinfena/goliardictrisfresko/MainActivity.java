@@ -30,14 +30,16 @@ public class MainActivity extends AppCompatActivity {
         this.btns[1][2] = findViewById(R.id.ImageButton12);
         this.btns[2][2] = findViewById(R.id.ImageButton22);
 
-        for (final int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
-            for (final int j = 0; j < 3; j++)
+            for (int j = 0; j < 3; j++)
             {
+                final int i1 = i; //ez che sporca sta roba
+                final int j1 = j; //
                 this.btns[i][j].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        btn_click(i, j, view);
+                        btn_click(i1, j1, view);
                     }
                 });
             }
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     {
         this.game = new Game();
         this.turno_attuale = Cell.Cross;
-        
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
