@@ -7,12 +7,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private final ImageButton[][] btns = new ImageButton[3][3];
     private Game game = new Game();
+
+    private ImageView img_symbol;
+    private TextView txt_victory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         this.btns[0][2] = findViewById(R.id.ImageButton02);
         this.btns[1][2] = findViewById(R.id.ImageButton12);
         this.btns[2][2] = findViewById(R.id.ImageButton22);
+
+        this.img_symbol = findViewById(R.id.img_symbol);
+        this.txt_victory = findViewById(R.id.txt_victory);
+        img_symbol.setImageResource(R.drawable.cross);
 
         for (int i = 0; i < 3; i++)
         {
@@ -94,24 +103,33 @@ public class MainActivity extends AppCompatActivity {
             ((ImageButton)view).setImageResource(getRandomDrawableRes(turno_attuale));
             if (game.move(i, j, turno_attuale))
                 mostra_vittoria(turno_attuale);
-
-            //change turn
-            if (this.turno_attuale == Cell.Cross)
-                this.turno_attuale = Cell.Nought;
             else
-                this.turno_attuale = Cell.Cross;
+            {
+                //change turn
+                if (this.turno_attuale == Cell.Cross)
+                    this.turno_attuale = Cell.Nought;
+                else
+                    this.turno_attuale = Cell.Cross;
+
+                if (this.turno_attuale == Cell.Cross)
+                    this.img_symbol.setImageResource(R.drawable.cross);
+                else
+                    this.img_symbol.setImageResource(R.drawable.nought);
+            }
         }
     }
     private void mostra_vittoria(Cell cell)
     {
-        //TODO
-        reset();
+        if (cell == Cell.Cross)
+            this.txt_victory.setText("Wins!");
     }
     private void reset()
     {
         this.game = new Game();
         this.turno_attuale = Cell.Cross;
 
+        this.img_symbol.setImageResource(R.drawable.cross);
+        this.txt_victory.setText("Turn");
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
