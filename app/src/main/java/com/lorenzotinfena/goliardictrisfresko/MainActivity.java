@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if (this.game.cells[i][j] == Cell.Empty)
         {
-            ((ImageButton)view).setImageResource(R.drawable.);
+            ((ImageButton)view).setImageResource(getRandomDrawableRes(turno_attuale));
             if (game.move(i, j, turno_attuale))
                 mostra_vittoria(turno_attuale);
 
@@ -107,7 +107,15 @@ public class MainActivity extends AppCompatActivity {
     }
     private void reset()
     {
-        game = new Game();
-
+        this.game = new Game();
+        this.turno_attuale = Cell.Cross;
+        
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                this.btns[i][j].setImageResource(android.R.color.transparent);
+            }
+        }
     }
 }
