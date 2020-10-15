@@ -2,6 +2,10 @@ package com.lorenzotinfena.goliardictrisfresko;
 
 public class Game {
     public final Cell[][] cells = new Cell[3][3];
+    public Game()
+    {
+
+    }
     public boolean move(int i, int j, Cell cell) //contraint cell != Cell.Empty
     {
         if (cell == Cell.Cross)

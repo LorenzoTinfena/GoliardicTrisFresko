@@ -41,7 +41,7 @@
                 android:id="@+id/txt_victory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Crosses"
+                android:text="Turn"
                 android:textColor="@color/black"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="64dp" />
@@ -151,7 +151,7 @@
                 android:topRightRadius="100dp" />
 
             <ImageButton
-                android:id="@id/ImageButton12"
+                android:id="@id/ImageButton21"
                 android:layout_width="50pt"
                 android:layout_height="50pt"
                 android:layout_marginLeft="3pt"
