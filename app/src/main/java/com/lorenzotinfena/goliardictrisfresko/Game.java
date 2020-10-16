@@ -1,11 +1,10 @@
 package com.lorenzotinfena.goliardictrisfresko;
 
+import android.graphics.Point;
+
 public class Game {
     public final Cell[][] cells = new Cell[3][3];
-    public Game()
-    {
-
-    }
+    public Point[] pointsVictory = new Point[3];
     public boolean move(int i, int j, Cell cell) //contraint cell != Cell.Empty
     {
         if (cell == Cell.Cross)
@@ -35,13 +34,32 @@ public class Game {
             }
         }
 
-        for (int i = 0; i < 3; i++)
-        {
-            if (lati[0][i] == 3 || lati[1][i] == 3)
+        for (int i = 0; i < 3; i++) {
+            if (lati[0][i] == 3) {
+                this.pointsVictory[0] = new Point(i, 0);
+                this.pointsVictory[1] = new Point(i, 1);
+                this.pointsVictory[2] = new Point(i, 2);
                 return true;
+            }
+            if (lati[1][i] == 3) {
+                this.pointsVictory[0] = new Point(0, i);
+                this.pointsVictory[1] = new Point(1, i);
+                this.pointsVictory[2] = new Point(2, i);
+                return true;
+            }
         }
-        if (diagonali[0] == 3 || diagonali[1] == 3)
+        if (diagonali[0] == 3){
+            this.pointsVictory[0] = new Point(0, 0);
+            this.pointsVictory[1] = new Point(1, 1);
+            this.pointsVictory[2] = new Point(2, 2);
             return true;
+        }
+        if (diagonali[1] == 3){
+            this.pointsVictory[0] = new Point(2, 0);
+            this.pointsVictory[1] = new Point(1, 1);
+            this.pointsVictory[2] = new Point(0, 2);
+            return true;
+        }
         return false;
     }
 }

@@ -2,6 +2,9 @@ package com.lorenzotinfena.goliardictrisfresko;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 ((ImageButton)view).setImageResource(getRandomDrawableRes(turno_attuale));
                 if (game.move(i, j, turno_attuale))
-                    mostra_vittoria(turno_attuale);
+                    mostra_vittoria();
                 else
                 {
                     //change turn
@@ -98,13 +101,43 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    private void mostra_vittoria(Cell cell)
+    private void mostra_vittoria()
     {
+        AnimatorSet animatorSet = new AnimatorSet();
+        for (int i = 0; i < 3; i++){
+            here:
+            for (int j = 0; j < 3; j++){
+                // BREAK IF IS A VICTORY CELL
+                for (int z = 0; z < 3; z++){
+                    if (new Point(i, j).equals(this.game.pointsVictory[z]))
+                        continue here;
+                }
+                ObjectAnimator animatorx = ObjectAnimator.ofFloat(this.btns[i][j], "ScaleX", 0.7f);
+                ObjectAnimator animatory = ObjectAnimator.ofFloat(this.btns[i][j], "ScaleY", 0.7f);
+                animatorSet.playTogether(animatorx);
+                animatorSet.playTogether(animatory);
+            }
+        }
+        animatorSet.setDuration(500);
+        animatorSet.start();
+
         this.txt_victory.setText("Wins!");
         inGame = false;
     }
     private void reset()
     {
+        AnimatorSet animatorSet = new AnimatorSet();
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                ObjectAnimator animatorx = ObjectAnimator.ofFloat(this.btns[i][j], "ScaleX", 1f);
+                ObjectAnimator animatory = ObjectAnimator.ofFloat(this.btns[i][j], "ScaleY", 1f);
+                animatorSet.playTogether(animatorx);
+                animatorSet.playTogether(animatory);
+            }
+        }
+        animatorSet.setDuration(700);
+        animatorSet.start();
+
         this.game = new Game();
         this.turno_attuale = Cell.Cross;
 
@@ -113,9 +146,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
-            {
                 this.btns[i][j].setImageResource(android.R.color.transparent);
-            }
         }
         inGame = true;
     }
