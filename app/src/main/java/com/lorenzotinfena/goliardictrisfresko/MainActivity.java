@@ -73,33 +73,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Cell turno_attuale = Cell.Cross;
+    private boolean inGame = true;
     private void btn_click(int i, int j, View view)
     {
-        System.out.println("ENTRATOO");
-        if (this.game.cells[i][j] == null)
-        {
-            ((ImageButton)view).setImageResource(getRandomDrawableRes(turno_attuale));
-            if (game.move(i, j, turno_attuale))
-                mostra_vittoria(turno_attuale);
-            else
+        if (inGame){
+            if (this.game.cells[i][j] == null)
             {
-                //change turn
-                if (this.turno_attuale == Cell.Cross)
-                    this.turno_attuale = Cell.Nought;
+                ((ImageButton)view).setImageResource(getRandomDrawableRes(turno_attuale));
+                if (game.move(i, j, turno_attuale))
+                    mostra_vittoria(turno_attuale);
                 else
-                    this.turno_attuale = Cell.Cross;
+                {
+                    //change turn
+                    if (this.turno_attuale == Cell.Cross)
+                        this.turno_attuale = Cell.Nought;
+                    else
+                        this.turno_attuale = Cell.Cross;
 
-                if (this.turno_attuale == Cell.Cross)
-                    this.img_symbol.setImageResource(R.drawable.cross);
-                else
-                    this.img_symbol.setImageResource(R.drawable.nought);
+                    if (this.turno_attuale == Cell.Cross)
+                        this.img_symbol.setImageResource(R.drawable.cross);
+                    else
+                        this.img_symbol.setImageResource(R.drawable.nought);
+                }
             }
         }
     }
     private void mostra_vittoria(Cell cell)
     {
-        if (cell == Cell.Cross)
-            this.txt_victory.setText("Wins!");
+        this.txt_victory.setText("Wins!");
+        inGame = false;
     }
     private void reset()
     {
@@ -115,5 +117,6 @@ public class MainActivity extends AppCompatActivity {
                 this.btns[i][j].setImageResource(android.R.color.transparent);
             }
         }
+        inGame = true;
     }
 }
