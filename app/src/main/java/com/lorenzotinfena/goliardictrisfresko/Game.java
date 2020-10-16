@@ -5,14 +5,18 @@ import android.graphics.Point;
 public class Game {
     public final Cell[][] cells = new Cell[3][3];
     public Point[] pointsVictory = new Point[3];
-    public boolean move(int i, int j, Cell cell) //contraint cell != Cell.Empty
+    public MoveResult move(int i, int j, Cell cell) //contraint cell != Cell.Empty
     {
         if (cell == Cell.Cross)
             cells[i][j] = Cell.Cross;
         else
             cells[i][j] = Cell.Nought;
 
-        return isVictory(cell);
+        if (isVictory(cell))
+            return MoveResult.Win;
+        else if (isDraw())
+            return MoveResult.Draw;
+        return MoveResult.Continue;
     }
     private boolean isVictory(Cell cell)
     {
@@ -61,5 +65,15 @@ public class Game {
             return true;
         }
         return false;
+    }
+    private boolean isDraw()
+    {
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                if (cells[i][j] == null)
+                    return false;
+            }
+        }
+        return true;
     }
 }

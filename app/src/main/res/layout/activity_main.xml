@@ -8,10 +8,9 @@
     android:background="@color/white">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="25pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +25,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:text="Reset"/>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
             <ImageView
@@ -48,6 +47,7 @@
                 tools:layout_editor_absoluteY="64dp" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/cellsLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
