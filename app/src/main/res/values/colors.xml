@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_buttons">#CEC9DE</color>
     <color name="txt_color">#38304f</color>
+    <color name="simbolo_centrale">#ccd9ff</color>
 </resources>

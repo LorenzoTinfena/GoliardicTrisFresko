@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -20,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout cellsLinearLayout;
     private final ImageButton[][] btns = new ImageButton[3][3];
     private Game game = new Game();
+    private ImageView simbolo_turno;
 
-    private ImageView img_symbol;
-    private TextView txt_victory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
         this.btns[1][2] = findViewById(R.id.ImageButton12);
         this.btns[2][2] = findViewById(R.id.ImageButton22);
 
-        this.img_symbol = findViewById(R.id.img_symbol);
-        this.txt_victory = findViewById(R.id.txt_victory);
-        img_symbol.setImageResource(R.drawable.cross);
+        this.simbolo_turno = findViewById(R.id.simbolo_turno);
 
         for (int i = 0; i < 3; i++)
         {
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         mostra_vittoria();
                         break;
                     case Draw:
-                        mostra_pareggio();
+                        reset();
                         break;
                     case Continue:
                         //change turn
@@ -100,14 +100,24 @@ public class MainActivity extends AppCompatActivity {
                         else
                             this.turno_attuale = Cell.Cross;
 
-                        if (this.turno_attuale == Cell.Cross)
-                            this.img_symbol.setImageResource(R.drawable.cross);
-                        else
-                            this.img_symbol.setImageResource(R.drawable.nought);
+                        sposta_simbolo_turno();
                         break;
                 }
             }
         }
+    }
+    private void sposta_simbolo_turno(){
+
+        Resources r = getResources();
+        int f = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45,   r.getDisplayMetrics());
+
+        ObjectAnimator animator;
+        if (this.turno_attuale == Cell.Cross)
+            animator = ObjectAnimator.ofFloat(this.simbolo_turno, "TranslationX", 0f);
+        else
+            animator = ObjectAnimator.ofFloat(this.simbolo_turno, "TranslationX", f);
+        animator.setDuration(300);
+        animator.start();
     }
     private void mostra_vittoria()
     {
@@ -131,27 +141,30 @@ public class MainActivity extends AppCompatActivity {
         animatorSet.start();
 
 
-        this.txt_victory.setText("Wins!");
+        // TODO
         inGame = false;
-    }
-    private void mostra_pareggio(){
-        this.img_symbol.setVisibility(View.GONE);
-        this.txt_victory.setText("Draw");
     }
     private void reset()
     {
-        this.game = new Game();
         this.turno_attuale = Cell.Cross;
-        this.img_symbol.setVisibility(View.VISIBLE);
-        this.img_symbol.setImageResource(R.drawable.cross);
-        this.txt_victory.setText("Turn");
+        sposta_simbolo_turno();
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
                 this.btns[i][j].setImageResource(android.R.color.transparent);
         }
-        inGame = true;
 
+        if (this.game.pointsVictory[0] != null){
+            for (int a = 0; a < 3; a++){
+                int i = this.game.pointsVictory[a].x, j = this.game.pointsVictory[a].y;
+                this.btns[i][j].setScaleX(0.7f);
+                this.btns[i][j].setScaleY(0.7f);
+                this.btns[j][2 - i].setScaleX(1f);
+                this.btns[j][2 - i].setScaleY(1f);
+            }
+        }
+
+        this.cellsLinearLayout.setRotation(-90f);
 
         // ANIMAZIONE
         AnimatorSet animatorSet = new AnimatorSet();
@@ -164,10 +177,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        this.cellsLinearLayout.setRotation(-90f);
         ObjectAnimator animatorCells = ObjectAnimator.ofFloat(this.cellsLinearLayout, "Rotation", 0f);
         animatorSet.playTogether(animatorCells);
         animatorSet.setDuration(700);
         animatorSet.start();
+
+        this.game = new Game();
+        inGame = true;
     }
 }

@@ -23,45 +23,58 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            style="?attr/materialButtonOutlinedStyle"
             android:text="Reset"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
+
             <TextView
-                android:id="@+id/txt_cross_points"
+                android:id="@+id/txt_crosses_points"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="right"
                 android:text="0"
                 android:textSize="30dp"
                 android:textColor="@color/txt_color"
-                android:layout_marginRight="20dp"/>
-            <ImageView
-                android:id="@+id/img_symbol"
+                android:layout_marginRight="10dp"/>
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                app:srcCompat="@drawable/cross"
-                android:layout_marginRight="8dp"/>
-            <TextView
-                android:id="@+id/txt_victory"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:gravity="center"
-                android:text="Turn"
-                android:textSize="20dp"
-                android:textColor="@color/txt_color"/>
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/simbolo_turno"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/iosicon"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/cross"
+                    app:tint="@color/txt_color"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="5dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/nought"
+                    app:tint="@color/txt_color"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="5dp"/>
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/txt_noughts_points"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="left"
                 android:text="0"
                 android:textSize="30dp"
                 android:textColor="@color/txt_color"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="10dp"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/cellsLinearLayout"
@@ -103,7 +116,6 @@
                 android:layout_marginRight="3pt"
                 android:layout_marginBottom="3pt"
                 android:background="@drawable/iosicon"
-
                 android:bottomLeftRadius="100dp"
                 android:bottomRightRadius="100dp"
                 android:padding="0pt"
