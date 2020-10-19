@@ -1,5 +1,6 @@
 package com.lorenzotinfena.goliardictrisfresko;
 
+import androidx.annotation.IntegerRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.AnimatorSet;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private final ImageButton[][] btns = new ImageButton[3][3];
     private Game game = new Game();
     private ImageView simbolo_turno;
+    private TextView txt_crosses_points;
+    private TextView txt_noughts_points;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         this.btns[2][2] = findViewById(R.id.ImageButton22);
 
         this.simbolo_turno = findViewById(R.id.simbolo_turno);
+        this.txt_crosses_points = findViewById(R.id.txt_crosses_points);
+        this.txt_noughts_points = findViewById(R.id.txt_noughts_points);
 
         for (int i = 0; i < 3; i++)
         {
@@ -85,13 +90,15 @@ public class MainActivity extends AppCompatActivity {
     {
         if (inGame){
             if (this.game.cells[i][j] == null) {
-                ((ImageButton)view).setImageResource(getRandomDrawableRes(turno_attuale));
-                switch (game.move(i, j, turno_attuale)){
+                MoveResult res = game.move(i, j, turno_attuale);
+                if (res != MoveResult.Draw)
+                    ((ImageButton)view).setImageResource(getRandomDrawableRes(turno_attuale));
+                switch (res){
                     case Win:
                         mostra_vittoria();
                         break;
                     case Draw:
-                        reset();
+                        next_round();
                         break;
                     case Continue:
                         //change turn
@@ -104,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
+        }
+        else{
+            next_round();
         }
     }
     private void sposta_simbolo_turno(){
@@ -140,12 +150,14 @@ public class MainActivity extends AppCompatActivity {
         animatorSet.setDuration(500);
         animatorSet.start();
 
+        if (this.game.cell_victory == Cell.Cross)
+            SetPoints(Cell.Cross, GetPoints(Cell.Cross) + 1);
+        else
+            SetPoints(Cell.Nought, GetPoints(Cell.Nought) + 1);
 
-        // TODO
         inGame = false;
     }
-    private void reset()
-    {
+    private void next_round(){
         this.turno_attuale = Cell.Cross;
         sposta_simbolo_turno();
         for (int i = 0; i < 3; i++)
@@ -154,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 this.btns[i][j].setImageResource(android.R.color.transparent);
         }
 
-        if (this.game.pointsVictory[0] != null){
+        if (this.game.pointsVictory[0] != null){ //if the game is not won
             for (int a = 0; a < 3; a++){
                 int i = this.game.pointsVictory[a].x, j = this.game.pointsVictory[a].y;
                 this.btns[i][j].setScaleX(0.7f);
@@ -184,5 +196,24 @@ public class MainActivity extends AppCompatActivity {
 
         this.game = new Game();
         inGame = true;
+    }
+    private void reset()
+    {
+        next_round();
+        SetPoints(Cell.Cross, 0);
+        SetPoints(Cell.Nought, 0);
+        txt_noughts_points.setText("0");
+    }
+    private int GetPoints(Cell cell){
+        if (cell == Cell.Cross)
+            return Integer.parseInt(txt_crosses_points.getText().toString());
+        else
+            return Integer.parseInt(txt_noughts_points.getText().toString());
+    }
+    private void SetPoints(Cell cell, int points){
+        if (cell == Cell.Cross)
+            txt_crosses_points.setText(Integer.toString(points));
+        else
+            txt_noughts_points.setText(Integer.toString(points));
     }
 }
