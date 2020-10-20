@@ -38,19 +38,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.linear_layout1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linear_layout_click()
+                linear_layout_click();
             }
         });
         findViewById(R.id.linear_layout2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linear_layout_click()
+                linear_layout_click();
             }
         });
         findViewById(R.id.linear_layout3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linear_layout_click()
+                linear_layout_click();
             }
         });
 
