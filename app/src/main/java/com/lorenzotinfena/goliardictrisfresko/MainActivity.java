@@ -35,6 +35,25 @@ public class MainActivity extends AppCompatActivity {
 
         cellsLinearLayout = findViewById(R.id.cellsLinearLayout);
 
+        findViewById(R.id.linear_layout1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linear_layout_click()
+            }
+        });
+        findViewById(R.id.linear_layout2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linear_layout_click()
+            }
+        });
+        findViewById(R.id.linear_layout3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linear_layout_click()
+            }
+        });
+
         // assign buttons
         this.btns[0][0] = findViewById(R.id.ImageButton00);
         this.btns[1][0] = findViewById(R.id.ImageButton10);
@@ -71,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 reset();
             }
         });
+    }
+    private void linear_layout_click(){
+        if (!this.inGame)
+            next_round();
     }
 
     private final int[] crosses = {R.drawable.c0, R.drawable.c1, R.drawable.c2, R.drawable.c3};
@@ -111,9 +134,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-        }
-        else{
-            next_round();
         }
     }
     private void sposta_simbolo_turno(){

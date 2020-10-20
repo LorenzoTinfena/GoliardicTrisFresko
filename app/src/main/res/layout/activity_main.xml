@@ -83,6 +83,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="10pt">
         <LinearLayout
+            android:id="@+id/linear_layout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -141,6 +142,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_layout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -199,6 +201,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_layout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
