@@ -135,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        else{
+            next_round();
+        }
     }
     private void sposta_simbolo_turno(){
 
