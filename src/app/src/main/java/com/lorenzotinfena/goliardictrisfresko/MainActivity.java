@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void linear_layout_click(){
         if (!this.inGame)
-            next_round();
+            next_round(false);
     }
 
     private final int[] crosses = {R.drawable.c0, R.drawable.c1, R.drawable.c2, R.drawable.c3};
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Cell turno_attuale = Cell.Cross;
+    private Cell who_started_this_round = Cell.Cross;
     private boolean inGame = true;
     private void btn_click(int i, int j, View view)
     {
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         mostra_vittoria();
                         break;
                     case Draw:
-                        next_round();
+                        next_round(false);
                         break;
                     case Continue:
                         //change turn
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            next_round();
+            next_round(false);
         }
     }
     private void sposta_simbolo_turno(){
@@ -180,8 +181,11 @@ public class MainActivity extends AppCompatActivity {
 
         inGame = false;
     }
-    private void next_round(){
-        this.turno_attuale = Cell.Cross;
+    private void next_round(boolean is_resetting){
+        if (is_resetting || who_started_this_round == Cell.Nought)
+            this.turno_attuale = Cell.Cross;
+        else
+            this.turno_attuale = Cell.Nought;
         sposta_simbolo_turno();
         for (int i = 0; i < 3; i++)
         {
@@ -222,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void reset()
     {
-        next_round();
+        next_round(true);
         SetPoints(Cell.Cross, 0);
         SetPoints(Cell.Nought, 0);
         txt_noughts_points.setText("0");

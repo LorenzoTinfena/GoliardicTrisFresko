@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GoliardicTrisFresko.iml" filepath="$PROJECT_DIR$/.idea/GoliardicTrisFresko.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GoliardicTrisFresko.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GoliardicTrisFresko.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/src.GoliardicTrisFresko.iml" filepath="$PROJECT_DIR$/.idea/modules/src.GoliardicTrisFresko.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/src.GoliardicTrisFresko.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/src.GoliardicTrisFresko.app.iml" />
     </modules>
   </component>
 </project>
