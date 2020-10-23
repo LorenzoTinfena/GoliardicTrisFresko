@@ -182,11 +182,17 @@ public class MainActivity extends AppCompatActivity {
         inGame = false;
     }
     private void next_round(boolean is_resetting){
-        if (is_resetting || who_started_this_round == Cell.Nought)
+        if (is_resetting || this.who_started_this_round == Cell.Nought)
+        {
+            this.who_started_this_round = Cell.Cross;
             this.turno_attuale = Cell.Cross;
+        }
         else
+        {
+            this.who_started_this_round = Cell.Nought;
             this.turno_attuale = Cell.Nought;
-        sposta_simbolo_turno();
+        }
+            sposta_simbolo_turno();
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
